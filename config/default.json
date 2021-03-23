@@ -1,0 +1,15 @@
+{
+    "mongoURI": "mongodb+srv://iamshub07:BeteMojKardi@cluster0.rp525.mongodb.net/myFirstDatabase?retryWrites=true&w=majority",
+    
+    "jwtSecretKey": "iloveyouGitika",
+    "sms_API": "UFjD9pKiTXbxMOGq48wCJzVu6fkNySres7Q1AZWvndl5cgt0BLiBIy82UZbsxeNYgA3QTP6uhqrDXEjd",
+    "MID": "nOXrHl25233376236206",
+    "M_KEY": "0%Db8emLEO&oRTw_",
+    "TRANSACTION_URL": "https://securegw-stage.paytm.in/order/process",
+    "STATUS_URL": "https://securegw-stage.paytm.in/order/status",
+    "WEBSITE": "WEBSTAGING",
+    "INDUSTRY_TYPE": "Retail",
+    "CHANNEL_ID": "WEB",
+    "EMAIL": "soni.rms18@gmail.com",
+    "PASS": "vlvfyprrobpyccns"
+}
