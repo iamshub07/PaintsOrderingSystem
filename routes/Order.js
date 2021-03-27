@@ -42,35 +42,22 @@ router.get('/brand', [auth, [
 // @api     Get /api/Products/category
 // @desc    Fetch all category of req.product
 // @access  private
-router.get('/category', [auth, [
+router.get('/category', [
     check('producttype', 'producttype is required').not().isEmpty(),
     check('brand', 'brand is required').not().isEmpty()
-]], async (req, res) => {
-    try {
-        const query = { brand: req.body.brand, Producttype: req.body.producttype };
-        const allcategory = await Products.find().distinct('category', query);
-        res.json(allcategory);
-    } catch (err) {
-        console.log(err.message);
-        res.status(500).send("Server Error! Contact Administrator");
-    }
-});
-
-// @api     Get /api/Products/category
-// @desc    Fetch all category of req.product
-// @access  private
-router.get('/category/////', [auth, [
-    check('brand', 'brand is required').not().isEmpty(),
-    check('producttype', 'producttype is required').not().isEmpty(),
-    check('category', 'category is required').not().isEmpty()
-]], async (req, res) => {
-    try {
-        const query = { brand: req.body.brand, producttype: req.body.producttype, category: req.body.category };
-        const allcategory = await Products.find().distinct('category', query);
-        res.json(allcategory);
-    } catch (err) {
-        console.log(err.message);
-        res.status(500).send("Server Error! Contact Administrator");
+], auth, async (req, res) => {
+    const error = validationResult(req)
+    if (!error.isEmpty()) {
+        return res.status(400).json({ errors: error.array() })
+    } else {
+        try {
+            const query = { brand: req.body.brand, producttype: req.body.producttype };
+            const allcategory = await Products.find().distinct('category', query);
+            res.json(allcategory);
+        } catch (err) {
+            console.log(err.message);
+            res.status(500).send("Server Error! Contact Administrator");
+        }
     }
 });
 

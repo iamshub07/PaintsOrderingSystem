@@ -16,7 +16,6 @@ app.use(bodyParser.urlencoded({
 // for parsingh body
 app.use(express.json({ extended: true }))
 
-// testing 123
 
 
 // Defining api routes

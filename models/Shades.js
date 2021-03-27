@@ -3,16 +3,29 @@ const mongoose = require('mongoose')
 const ShadeSchema = mongoose.Schema({
 
     shadecode: {
+        // Shade name
         type: String,
         required: true
     },
     hexvalue: {
+        // Hex code
         type: String,
-        required: true
+
     },
-    shadecolor: {
+    r: {
         type: String,
-        required: true
+
+    },
+    g: {
+        type: String,
+
+    },
+    b: {
+        type: String,
+
+    },
+    shadename: {
+        type: String,
     }
 })
 ShadeSchema.index({ '$**': 'text' });
