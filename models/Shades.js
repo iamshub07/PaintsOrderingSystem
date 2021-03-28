@@ -6,17 +6,30 @@ const ShadeSchema = mongoose.Schema({
         type: String,
         required: true
     },
-    hexvalue: {
+    shadename: {
         type: String,
         required: true
     },
-    shadecolor: {
+    r: {
         type: String,
-        required: true
+        required: false
+    },
+    g: {
+        type: String,
+        required: false
+    },
+    b: {
+        type: String,
+        required: false
+    },
+    hexvalue: {
+        type: String,
+        required: false
     }
+    
 })
 ShadeSchema.index({ '$**': 'text' });
 
 
-const shadedetail = mongoose.model('ProductDetails', ShadeSchema);
+const shadedetail = mongoose.model('shadedetail', ShadeSchema);
 module.exports = shadedetail;

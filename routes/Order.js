@@ -4,6 +4,7 @@ const { check, validationResult, body } = require('express-validator')
 const router = express.Router()
 const auth = require('../middleware/auth')
 const Products = require('../models/Products')
+const shade = require('../models/Shades');
 const Review = require('../models/Reviews')
 // pagination
 var mongoose = require('mongoose');
@@ -39,17 +40,13 @@ router.get('/brand', [auth, [
     }
 });
 
-// @api     Get /api/Products/category
-// @desc    Fetch all category of req.product
+// @api     Get /api/Products/shade
+// @desc    Fetch all brand of req.product
 // @access  private
-router.get('/category', [auth, [
-    check('producttype', 'producttype is required').not().isEmpty(),
-    check('brand', 'brand is required').not().isEmpty()
-]], async (req, res) => {
+router.get('/shade',async (req, res) => {
     try {
-        const query = { brand: req.body.brand, Producttype: req.body.producttype };
-        const allcategory = await Products.find().distinct('category', query);
-        res.json(allcategory);
+        const allbrand = await shade.find();
+        res.json(allbrand);
     } catch (err) {
         console.log(err.message);
         res.status(500).send("Server Error! Contact Administrator");
@@ -59,13 +56,12 @@ router.get('/category', [auth, [
 // @api     Get /api/Products/category
 // @desc    Fetch all category of req.product
 // @access  private
-router.get('/category/////', [auth, [
-    check('brand', 'brand is required').not().isEmpty(),
+router.get('/category', [auth, [
     check('producttype', 'producttype is required').not().isEmpty(),
-    check('category', 'category is required').not().isEmpty()
+    check('brand', 'brand is required').not().isEmpty()
 ]], async (req, res) => {
     try {
-        const query = { brand: req.body.brand, producttype: req.body.producttype, category: req.body.category };
+        const query = { brand: req.body.brand, producttype: req.body.producttype };
         const allcategory = await Products.find().distinct('category', query);
         res.json(allcategory);
     } catch (err) {
@@ -73,6 +69,7 @@ router.get('/category/////', [auth, [
         res.status(500).send("Server Error! Contact Administrator");
     }
 });
+
 
 // @api     Get /api/Products/subBrand
 // @desc    Fetch all subBrand of req.product
