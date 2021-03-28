@@ -3,28 +3,29 @@ const mongoose = require('mongoose')
 const ShadeSchema = mongoose.Schema({
 
     shadecode: {
+        // Shade name
         type: String,
         required: true
     },
-    shadename: {
+    hexvalue: {
+        // Hex code
         type: String,
-        required: true
+
     },
     r: {
         type: String,
-        required: false
+
     },
     g: {
         type: String,
-        required: false
+
     },
     b: {
         type: String,
-        required: false
+
     },
-    hexvalue: {
+    shadename: {
         type: String,
-        required: false
     }
     
 })

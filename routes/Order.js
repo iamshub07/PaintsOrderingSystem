@@ -43,30 +43,22 @@ router.get('/brand', [auth, [
 // @api     Get /api/Products/shade
 // @desc    Fetch all brand of req.product
 // @access  private
-router.get('/shade',async (req, res) => {
-    try {
-        const allbrand = await shade.find();
-        res.json(allbrand);
-    } catch (err) {
-        console.log(err.message);
-        res.status(500).send("Server Error! Contact Administrator");
-    }
-});
-
-// @api     Get /api/Products/category
-// @desc    Fetch all category of req.product
-// @access  private
-router.get('/category', [auth, [
+router.get('/category', [
     check('producttype', 'producttype is required').not().isEmpty(),
     check('brand', 'brand is required').not().isEmpty()
-]], async (req, res) => {
-    try {
-        const query = { brand: req.body.brand, producttype: req.body.producttype };
-        const allcategory = await Products.find().distinct('category', query);
-        res.json(allcategory);
-    } catch (err) {
-        console.log(err.message);
-        res.status(500).send("Server Error! Contact Administrator");
+], auth, async (req, res) => {
+    const error = validationResult(req)
+    if (!error.isEmpty()) {
+        return res.status(400).json({ errors: error.array() })
+    } else {
+        try {
+            const query = { brand: req.body.brand, producttype: req.body.producttype };
+            const allcategory = await Products.find().distinct('category', query);
+            res.json(allcategory);
+        } catch (err) {
+            console.log(err.message);
+            res.status(500).send("Server Error! Contact Administrator");
+        }
     }
 });
 
@@ -81,6 +73,20 @@ router.get('/subBrand', [
 ], async (req, res) => {
     try {
         const allcategory = await Products.find({ brand: req.body.brand, producttype: req.body.producttype, category: req.body.category });
+        res.json(allcategory);
+    } catch (err) {
+        console.log(err.message);
+        res.status(500).send("Server Error! Contact Administrator");
+    }
+});
+
+
+// @api     Get /api/Products/shade
+// @desc    Fetch all subBrand of req.product
+// @access  private
+router.get('/shade',async (req, res) => {
+    try {
+        const allcategory = await shade.find();
         res.json(allcategory);
     } catch (err) {
         console.log(err.message);

@@ -16,6 +16,8 @@ app.use(bodyParser.urlencoded({
 // for parsingh body
 app.use(express.json({ extended: true }))
 
+
+
 // Defining api routes
 app.use('/api/auth', require('./routes/Auth'))
 app.use('/api/users', require('./routes/Users'))
